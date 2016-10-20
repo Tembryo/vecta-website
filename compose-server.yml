@@ -1,0 +1,17 @@
+proxy:
+  image: jwilder/nginx-proxy
+  ports:
+    - "80:80"
+  volumes:
+    - "/var/run/docker.sock:/tmp/docker.sock:ro"
+vecta-wp:
+  image: fluential/docker-wordpress-nginx-lowmem
+  volumes:
+    - "/usr/local/vecta/mysql:/var/lib/mysql"
+    - "/usr/local/vecta/www:/usr/share/nginx/www"
+    - "/usr/local/vecta/log:/var/log/"
+    - "/usr/local/vecta/nginx:/etc/nginx/"
+  environment:
+    - VIRTUAL_HOST="vecta.tv,www.vecta.tv"
+  expose:
+    - 80
