@@ -5,17 +5,17 @@ proxy:
   volumes:
     - "/var/run/docker.sock:/tmp/docker.sock:ro"
 web:
-    image: wordpress
-    links:
-     - mysql
-    environment:
+  image: wordpress
+  links:
+    - mysql
+  environment:
     - VIRTUAL_HOST="vecta.tv,www.vecta.tv"
     - VIRTUAL_PORT="8080"
     - WORDPRESS_DB_PASSWORD="vecta-wordpress-db-pw"
 mysql:
-    image: mysql:5.7
-    environment:
-     - MYSQL_ROOT_PASSWORD="vecta-wordpress-db-pw"
-     - MYSQL_DATABASE=wordpress
-   volumes:
-     -v /usr/local/vecta/mysql:/var/lib/mysql
+  image: mysql:5.7
+  environment:
+    - MYSQL_ROOT_PASSWORD="vecta-wordpress-db-pw"
+    - MYSQL_DATABASE=wordpress
+  volumes:
+    -v /usr/local/vecta/mysql:/var/lib/mysql
